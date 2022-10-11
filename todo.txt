@@ -1,0 +1,8 @@
+1-BS & LS
+2-heap sort
+3-merge sort
+4-topological sort
+6-dijkstrs
+8-krushkals
+12a- Horspool algorithm not working
+13- prims
