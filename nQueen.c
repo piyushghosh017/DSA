@@ -1,10 +1,51 @@
 //program to solve the n queen problem 
 //grid[][] is represent the 2-d array with value(0 and 1) for grid[i][j]=1 means queen i are placed at j column.
 //we can take any number of queen , for this time we take the atmost 10 queen (grid[10][10]).
-#include<stdio.h>
-#include<stdbool.h>
-int grid[10][10];
 
+#include<stdio.h>
+#include<math.h>
+#include<stdbool.h>
+
+
+int x[20],count=1;
+
+int place(int k,int j){
+    for(int i=1;i<k;i++){
+        if((x[i]==j) || abs(x[i]-j)==abs(i-k)){
+            return 0;
+        }
+    }
+    return 1;
+}
+void queens(int n,int k){
+
+    for(int j=1;j<=n;j++){
+        if(place(k,j)){
+            x[k]=j;
+            if(k==n){
+                printf("%d solution:\n",count);
+                count++;
+                for(int i=1;i<=n;i++){
+                    printf("%d row-->%d column\n",i,x[i]);
+                } 
+                printf("\n");
+            }
+            else{
+                queens(n,k+1);
+            }
+        }
+    }
+}
+void main(){
+    int n,k=1;
+    printf("enter the number of queens:");
+    scanf("%d",&n);
+    queens(n,k);
+}
+
+
+/*
+int grid[10][10];
 //print the solution
 void print(int n) {
     for (int i = 0;i < n; i++) {
@@ -84,3 +125,5 @@ int main()
         }
   return 0;
 }
+
+*/

@@ -5,18 +5,18 @@
 #include<stdio.h>
 #include<time.h>
 int arr[100];
-double t;
 
 int partition(int arr[],int s,int e){
 int pivot=arr[s];
 int cnt=0;
+
 for(int i=s+1;i<=e;i++){
     if(arr[i]<=pivot){
         cnt++;
     }
 }
 //place pivot at right position
-int pivotIndex = s + cnt;
+    int pivotIndex = s + cnt;
     int temp = arr[pivotIndex];
     arr[pivotIndex] = arr[s];
     arr[s] = temp;
@@ -51,37 +51,71 @@ int pivotIndex = s + cnt;
 
 void quickSort(int arr[],int s,int e){
     int pi;
-    clock_t begin, end; 
     if(s>=e)return;
     //partitioon karenfe
-    begin = clock();
     pi=partition(arr,s,e);
-
     //left part sort karo
     quickSort(arr,s,pi-1);
     //right wala part sort karo
     quickSort(arr,pi+1,e);
-    end=clock();
-    t=end-begin;
-    printf("\nTime taken %f cpu1 cycle",(double)t/CLOCKS_PER_SEC);
-
-
+   
 }
 
 int main(){
-    int i,n;
-    printf("Enter no of ele:");
-    scanf("%d",&n);
-    printf("Enter ele:");
-    for(i=0;i<n;i++){
-        scanf("%d",&arr[i]);
-    }
-    quickSort(arr,0,n-1);
-    for(int i=0; i<n; i++) 
-    {
-        printf("%d",arr[i]);
-    } 
-    return 0;
+    int i,n,ch;
+    clock_t st,ed;
+    while(1){
+        printf("\nMENU:\n1.wort case analysis\n2.best case analysis\nenter your choice:");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1:
+                printf("worst case :\n");
+                printf("Enter no of ele:");
+                scanf("%d",&n);
+                printf("enter the elements :\n");
+                for(int i=0;i<n;i++){
+                    scanf("%d",&arr[i]);
+                }
+                printf("elemets are:\n");
+                for(int i=0;i<n;i++){
+                    printf("%d ",arr[i]);
+                }
+                st=clock();
+                quickSort(arr,0,n-1);
+                ed=clock();
+                printf("\narray after sort:\n");
+                for(int i=0;i<n;i++){
+                    printf("%d ",arr[i]);
+                }
+                printf("\ntime taken is %lf secs",(double)(ed-st)/CLOCKS_PER_SEC);
+                break;
+            case 2:
+                printf("worst case :\n");
+                printf("RANDOM elements :\n");
+                for(int i=0;i<n;i++){
+                    arr[i]=rand()%100;
+                }
+                printf("array before sort:\n");
+                for(int i=0;i<n;i++){
+                    printf("%d ",arr[i]);
+                }
+                st=clock();
+                quickSort(arr,0,n-1);
+                ed=clock();
 
+                printf("\narray after sort:\n");
+                for(int i=0;i<n;i++){
+                    printf("%d ",arr[i]);
+                }
+                printf("\ntime taken is %Lf secs",(double)(ed-st)/CLOCKS_PER_SEC);
+                break;
+            default:
+                printf("invalid input..!\n");
+                break;
+        }
+        
+    }
+   
+    return 0;
 
 }
